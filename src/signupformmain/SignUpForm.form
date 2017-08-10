@@ -200,6 +200,7 @@
     <Component class="com.toedter.calendar.JDateChooser" name="DoBComboBox">
       <AuxValues>
         <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new com.toedter.calendar.JDateChooser()"/>
+        <AuxValue name="JavaCodeGenerator_InitCodePre" type="java.lang.String" value="JTextFieldDateEditor editor = (JTextFieldDateEditor) DoBComboBox.getDateEditor();&#xa;editor.setEditable(false);"/>
       </AuxValues>
     </Component>
     <Component class="javax.swing.JRadioButton" name="femaleRadio">

@@ -5,6 +5,7 @@ package signupformmain;
  * @author Faisal
  */
 import com.toedter.calendar.JDateChooser;
+import com.toedter.calendar.JTextFieldDateEditor;
 import java.awt.*;
 import java.awt.event.*;
 import java.text.DateFormat;
@@ -81,6 +82,9 @@ public class SignUpForm extends javax.swing.JFrame {
         });
 
         bdayLabel.setText("Birthday");
+
+        JTextFieldDateEditor editor = (JTextFieldDateEditor) DoBComboBox.getDateEditor();
+        editor.setEditable(false);
 
         femaleRadio.setActionCommand("Female");
         gender.add(femaleRadio);
@@ -183,9 +187,12 @@ public class SignUpForm extends javax.swing.JFrame {
     }//GEN-LAST:event_loginButtonActionPerformed
     
     private void signUpButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_signUpButtonActionPerformed
-        
+
         try{
             Pattern letterPattern = Pattern.compile("^[a-zA-Z]+$");
+            Pattern emailPattern = Pattern.compile("^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@"
+                    + "[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$");
+            
             SimpleDateFormat dFormat = new SimpleDateFormat("dd MMM, yyyy");
 
             FinalFrame secondFrameObj = new FinalFrame(firstNameField.getText(),lastNameField.getText(),emailField.getText(),
@@ -201,12 +208,14 @@ public class SignUpForm extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(null, "Please enter a valid character in Last Name", "Error", JOptionPane.ERROR_MESSAGE);
             else if(emailField.getText().equals(""))
                 JOptionPane.showMessageDialog(null, "Please Enter Email", "Error", JOptionPane.ERROR_MESSAGE);
+            else if(!emailPattern.matcher(emailField.getText()).matches())
+                JOptionPane.showMessageDialog(null, "Please Enter Valid Email Address", "Error", JOptionPane.ERROR_MESSAGE);
             else if(new String(passwordField.getPassword()).equals(""))
                 JOptionPane.showMessageDialog(null, "Please Enter Password", "Error", JOptionPane.ERROR_MESSAGE);
             else
-                secondFrameObj.setVisible(true);        
+                secondFrameObj.setVisible(true);              
             }catch(NullPointerException npe){
-                JOptionPane.showMessageDialog(null, "Please Select Date of Birth & Gender", "Error", JOptionPane.ERROR_MESSAGE);
+                JOptionPane.showMessageDialog(null, "Pxlease Select Date of Birth & Gender", "Error", JOptionPane.ERROR_MESSAGE);
             }
     }//GEN-LAST:event_signUpButtonActionPerformed
 
