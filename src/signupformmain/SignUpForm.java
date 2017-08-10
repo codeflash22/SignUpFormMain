@@ -10,6 +10,7 @@ import java.awt.event.*;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.regex.Pattern;
 import javax.swing.*;
 
 public class SignUpForm extends javax.swing.JFrame {
@@ -178,29 +179,34 @@ public class SignUpForm extends javax.swing.JFrame {
     private void loginButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_loginButtonActionPerformed
         String info = "User ID: " + loginIDField.getText() + 
                 " , Password: " + new String(loginPWField.getPassword());
-        //JOptionPane.showMessageDialog(this, info);
+        JOptionPane.showMessageDialog(this, info);
     }//GEN-LAST:event_loginButtonActionPerformed
     
     private void signUpButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_signUpButtonActionPerformed
         
         try{
+            Pattern letterPattern = Pattern.compile("^[a-zA-Z]+$");
             SimpleDateFormat dFormat = new SimpleDateFormat("dd MMM, yyyy");
 
             FinalFrame secondFrameObj = new FinalFrame(firstNameField.getText(),lastNameField.getText(),emailField.getText(),
                     gender.getSelection().getActionCommand(),dFormat.format(DoBComboBox.getDate()));
 
             if(firstNameField.getText().equals(""))
-                JOptionPane.showConfirmDialog(rootPane, "Please Enter First Name");
-            if(lastNameField.getText().equals(""))
-                JOptionPane.showConfirmDialog(rootPane, "Please Enter Last Name");
-            if(emailField.getText().equals(""))
-                JOptionPane.showConfirmDialog(rootPane, "Please Enter your Email");
-            if(new String(passwordField.getPassword()).equals(""))
-                JOptionPane.showConfirmDialog(rootPane, "Please Enter Password");
+                JOptionPane.showMessageDialog(null, "Please Enter First Name", "Error", JOptionPane.ERROR_MESSAGE);
+            else if(!(letterPattern.matcher(firstNameField.getText()).matches()))
+                JOptionPane.showMessageDialog(null, "Please enter a valid character in First Name", "Error", JOptionPane.ERROR_MESSAGE);
+            else if(lastNameField.getText().equals(""))
+                JOptionPane.showMessageDialog(null, "Please Enter Last Name", "Error", JOptionPane.ERROR_MESSAGE);
+            else if(!(letterPattern.matcher(lastNameField.getText()).matches()))
+                JOptionPane.showMessageDialog(null, "Please enter a valid character in Last Name", "Error", JOptionPane.ERROR_MESSAGE);
+            else if(emailField.getText().equals(""))
+                JOptionPane.showMessageDialog(null, "Please Enter Email", "Error", JOptionPane.ERROR_MESSAGE);
+            else if(new String(passwordField.getPassword()).equals(""))
+                JOptionPane.showMessageDialog(null, "Please Enter Password", "Error", JOptionPane.ERROR_MESSAGE);
             else
                 secondFrameObj.setVisible(true);        
             }catch(NullPointerException npe){
-                JOptionPane.showConfirmDialog(rootPane, "Please Select Date of Birth and Gender");
+                JOptionPane.showMessageDialog(null, "Please Select Date of Birth & Gender", "Error", JOptionPane.ERROR_MESSAGE);
             }
     }//GEN-LAST:event_signUpButtonActionPerformed
 
