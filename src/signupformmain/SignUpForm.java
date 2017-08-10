@@ -183,25 +183,25 @@ public class SignUpForm extends javax.swing.JFrame {
     
     private void signUpButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_signUpButtonActionPerformed
         
-        SimpleDateFormat dFormat = new SimpleDateFormat("dd MMM, yyyy");
+        try{
+            SimpleDateFormat dFormat = new SimpleDateFormat("dd MMM, yyyy");
 
-        String info = firstNameField.getText() + lastNameField.getText() + emailField.getText() + 
-                new String(passwordField.getPassword()) + dFormat.format(DoBComboBox.getDate()) + 
-                gender.getSelection().getActionCommand();
+            FinalFrame secondFrameObj = new FinalFrame(firstNameField.getText(),lastNameField.getText(),emailField.getText(),
+                    gender.getSelection().getActionCommand(),dFormat.format(DoBComboBox.getDate()));
 
-        FinalFrame secondFrameObj = new FinalFrame(firstNameField.getText(),lastNameField.getText(),emailField.getText(),
-                gender.getSelection().getActionCommand(),dFormat.format(DoBComboBox.getDate()));
-        
-        if(firstNameField.getText().equals(""))
-            JOptionPane.showConfirmDialog(rootPane, "Please Enter First Name");
-        if(lastNameField.getText().equals(""))
-            JOptionPane.showConfirmDialog(rootPane, "Please Enter Last Name");
-        if(emailField.getText().equals(""))
-            JOptionPane.showConfirmDialog(rootPane, "Please Enter your Email");
-        if(new String(passwordField.getPassword()).equals(""))
-            JOptionPane.showConfirmDialog(rootPane, "Please Enter Password");
-        else
-            secondFrameObj.setVisible(true);        
+            if(firstNameField.getText().equals(""))
+                JOptionPane.showConfirmDialog(rootPane, "Please Enter First Name");
+            if(lastNameField.getText().equals(""))
+                JOptionPane.showConfirmDialog(rootPane, "Please Enter Last Name");
+            if(emailField.getText().equals(""))
+                JOptionPane.showConfirmDialog(rootPane, "Please Enter your Email");
+            if(new String(passwordField.getPassword()).equals(""))
+                JOptionPane.showConfirmDialog(rootPane, "Please Enter Password");
+            else
+                secondFrameObj.setVisible(true);        
+            }catch(NullPointerException npe){
+                JOptionPane.showConfirmDialog(rootPane, "Please Select Date of Birth and Gender");
+            }
     }//GEN-LAST:event_signUpButtonActionPerformed
 
     private void firstNameFieldFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_firstNameFieldFocusGained
